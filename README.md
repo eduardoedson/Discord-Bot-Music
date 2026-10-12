@@ -142,6 +142,30 @@ SYNC_GUILD_ID=      # optional: a single guild ID for fast command sync
 python3 main.py
 ```
 
+---
+
+## 🐳 Running with Docker
+
+Create your `.env` file (see above), then build and start the bot with Docker Compose:
+
+```bash
+docker compose up -d --build
+```
+
+Useful commands:
+
+```bash
+docker compose logs -f     # follow logs
+docker compose down        # stop and remove the container
+```
+
+Or without Compose:
+
+```bash
+docker build -t discord-music-bot .
+docker run -d --name discord-music-bot --env-file .env --restart unless-stopped discord-music-bot
+```
+
 On startup, the bot will:
 1. Log into Discord  
 2. Automatically clear and sync slash commands (`/play`, `/skip`, etc.)  

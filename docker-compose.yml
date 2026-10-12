@@ -1,0 +1,10 @@
+services:
+  musicbot:
+    build: .
+    container_name: discord-music-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    # Uncomment to provide a yt-dlp cookies file (set YTDLP_COOKIES=/app/cookies.txt in .env)
+    # volumes:
+    #   - ./cookies.txt:/app/cookies.txt:ro

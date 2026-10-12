@@ -1,0 +1,17 @@
+.venv/
+.env
+.envrc
+.vscode/
+__pycache__/
+**/__pycache__/
+*.pyc
+.DS_Store
+.history
+.cookies
+.git/
+.gitignore
+sftp.json
+README.md
+docker-compose.yml
+Dockerfile
+.dockerignore
