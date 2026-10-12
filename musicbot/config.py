@@ -23,9 +23,11 @@ def _parse_int(env_val: str | None, default: int) -> int:
 # Auto disconnect seconds after queue finishes (0 disables auto-leave)
 AUTO_DISCONNECT_SECONDS = _parse_int(os.getenv("AUTO_DISCONNECT_SECONDS"), 180)
 
-# yt-dlp options tuned to avoid SABR and prefer m4a (android client)
+# yt-dlp options for resolving a directly playable audio stream.
+# Let yt-dlp select the current supported YouTube clients automatically;
+# forcing android/web clients can require a PO token and expose no audio formats.
 YTDL_OPTS = {
-    # Prefer m4a first (usually works well with android client), then any bestaudio
+    # Prefer m4a first, then fall back to any available audio-capable format.
     "format": "bestaudio[ext=m4a]/bestaudio/best",
     "noplaylist": True,
     "quiet": True,
@@ -36,13 +38,6 @@ YTDL_OPTS = {
     "nocheckcertificate": True,
     "cachedir": False,
     "skip_download": True,
-    # Force YouTube player client to 'android' first to bypass SABR formats
-    "extractor_args": {"youtube": {"player_client": ["android", "web"]}},
-    # Add a common UA (yt-dlp sets one anyway, but we can be explicit)
-    "http_headers": {
-        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-                      "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-    },
 }
 
 if YTDLP_COOKIES and os.path.isfile(YTDLP_COOKIES):
